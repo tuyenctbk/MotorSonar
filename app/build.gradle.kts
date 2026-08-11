@@ -12,14 +12,14 @@ plugins {
 
 android {
   namespace = "com.example"
-  compileSdk { version = release(36) { minorApiLevel = 1 } }
+  compileSdk = 36
 
   defaultConfig {
     applicationId = "com.soloprono.motorsonar"
     minSdk = 24
     targetSdk = 36
-    versionCode = 6
-    versionName = "1.1.3"
+    versionCode = 11
+    versionName = "1.2.3"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -31,12 +31,28 @@ android {
       keyAlias = "androiddebugkey"
       keyPassword = "android"
     }
+    create("release") {
+      val localProperties = Properties()
+      val localPropertiesFile = rootProject.file("local.properties")
+      if (localPropertiesFile.exists()) {
+        localProperties.load(localPropertiesFile.inputStream())
+      }
+
+      val storeFilePath = localProperties.getProperty("RELEASE_STORE_FILE")
+      if (!storeFilePath.isNullOrEmpty()) {
+        storeFile = rootProject.file(storeFilePath)
+      }
+      storePassword = localProperties.getProperty("RELEASE_STORE_PASSWORD")
+      keyAlias = localProperties.getProperty("RELEASE_KEY_ALIAS")
+      keyPassword = localProperties.getProperty("RELEASE_KEY_PASSWORD")
+    }
   }
 
   buildTypes {
     release {
       isCrunchPngs = false
       isMinifyEnabled = false
+      signingConfig = signingConfigs.getByName("release")
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
     debug { signingConfig = signingConfigs.getByName("debugConfig") }
