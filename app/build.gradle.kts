@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-  namespace = "com.example"
+  namespace = "com.soloprono.motorsonar"
   compileSdk = 36
 
   defaultConfig {
