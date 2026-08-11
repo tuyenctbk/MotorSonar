@@ -1,0 +1,69 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Outer thin sonar ring -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M 54,22 A 32,32 0 1 1 53.99,22 Z"
+        android:strokeWidth="1.5"
+        android:strokeColor="#4DFF9800" />
+        
+    <!-- Middle sonar ring -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M 54,34 A 20,20 0 1 1 53.99,34 Z"
+        android:strokeWidth="2"
+        android:strokeColor="#80FF9800" />
+
+    <!-- Innermost motor gear core / center ring -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M 54,42 A 12,12 0 1 1 53.99,42 Z"
+        android:strokeWidth="3.5"
+        android:strokeColor="#FFFF9800" />
+
+    <!-- Gear Teeth / radiating diagnostic notches around core -->
+    <!-- Top tooth -->
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 52,26 h 4 v 6 h -4 z" />
+    <!-- Bottom tooth -->
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 52,76 h 4 v 6 h -4 z" />
+    <!-- Left tooth -->
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 26,52 v 4 h 6 v -4 z" />
+    <!-- Right tooth -->
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 76,52 v 4 h 6 v -4 z" />
+    
+    <!-- Diagonal teeth -->
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 35.5,35.5 l 2.8,2.8 l -2.8,2.8 l -2.8,-2.8 z" />
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 69.7,69.7 l 2.8,2.8 l -2.8,2.8 l -2.8,-2.8 z" />
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 35.5,69.7 l 2.8,-2.8 l 2.8,2.8 l -2.8,2.8 z" />
+    <path
+        android:fillColor="#FFFF9800"
+        android:pathData="M 69.7,35.5 l 2.8,-2.8 l 2.8,2.8 l -2.8,2.8 z" />
+
+    <!-- Sonic diagnostics laser line (horizontal waveform) passing through -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M 12,54 L 32,54 L 38,42 L 44,66 L 50,50 L 56,58 L 62,38 L 68,70 L 74,54 L 96,54"
+        android:strokeWidth="3"
+        android:strokeColor="#FF2A6D"
+        android:strokeLineJoin="round"
+        android:strokeLineCap="round" />
+
+</vector>

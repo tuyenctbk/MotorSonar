@@ -1,0 +1,6 @@
+{
+  "name": "MotorSonar",
+  "description": "Minimalist high-end engine sound diagnostic and health tracking app with mechanic scam protection and cost estimates.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

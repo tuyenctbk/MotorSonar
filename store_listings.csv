@@ -1,0 +1,61 @@
+Language Code,Language Name,App Name (max 30),Short Description (max 80),Full Description (max 4000)
+en,English,MotorSonar,High-End Engine Acoustic Diagnostics,MotorSonar is a professional AI-powered engine diagnostic tool that uses acoustic analysis to detect engine wear, idle speed anomalies, mechanical degradation, and part failures in cars, motorcycles, and scooters. Featuring real-time oscilloscope tracking, multi-month baseline wear comparison, mechanic scam shield reports, and Gemini AI master mechanic insights.
+es,Spanish,MotorSonar,Diagnóstico acústico de motores con IA,MotorSonar es una herramienta profesional de diagnóstico de motores con IA que utiliza análisis acústico para detectar desgaste, anomalías en el ralentí y fallas mecánicas en automóviles, motocicletas y scooters en tiempo real.
+fr,French,MotorSonar,Diagnostic acoustique moteur par IA,MotorSonar est un outil professionnel de diagnostic de moteur alimenté par l'IA qui utilise l'analyse acoustique pour détecter l'usure, les anomalies de ralenti et les pannes sur les voitures et motos.
+de,German,MotorSonar,KI-gestützte Motoren-Akustikdiagnose,MotorSonar ist ein professionelles KI-gestütztes Motordiagnosetool zur Erkennung von Verschleiß, Leerlaufanomalien und mechanischen Defekten bei Autos und Motorrädern.
+it,Italian,MotorSonar,Diagnostica acustica motore con IA,MotorSonar è uno strumento professionale di diagnostica del motore basato sull'intelligenza artificiale per rilevare usura, anomalie del minimo e guasti meccanici tramite analisi acustica.
+pt,Portuguese,MotorSonar,Diagnóstico acústico de motores IA,MotorSonar é uma ferramenta profissional de diagnóstico de motores com IA para detectar desgaste, anomalias de marcha-lisa e falhas em carros, motos e scooters através de análise acústica.
+ru,Russian,MotorSonar,Акустическая диагностика двигателя ИИ,MotorSonar — профессиональный инструмент диагностики двигателей на базе ИИ для определения износа, аномалий холостого хода и неполадок автомобилей и мотоциклов.
+zh,Chinese (Simplified),MotorSonar,AI智能发动机声学诊断工具,MotorSonar 是一款基于人工智能的专业发动机诊断工具，可通过声学分析实时检测汽车、摩托车和踏板车的发动机磨损、怠速异常与机械故障。
+ja,Japanese,MotorSonar,AIエンジン音響・異音診断アプリ,MotorSonarは、音響解析により自動車やバイク、スクーターのエンジン摩耗や異常音、アイドリング不調を検知するプロフェッショナルなAI診断ツールです。
+ko,Korean,MotorSonar,AI 엔진 사운드 및 결함 진단 도구,MotorSonar는 음향 분석을 통해 자동차, 오토바이, 스쿠터의 엔진 마모와 이상 징후, 공회전 불안정을 감지하는 전문가용 AI 진단 도구입니다.
+ar,Arabic,MotorSonar,تشخيص صوت المحرك بالذكاء الاصطناعي,MotorSonar هو أداة احترافية لتشخيص المحركات تعتمد على الذكاء الاصطناعي لاكتشاف التآكل، وانحرافات سرعة الخمول، والأعطال الميكانيكية في السيارات والدراجات النارية عبر التحليل الصوتي.
+hi,Hindi,MotorSonar,AI इंजन ध्वनि निदान और विश्लेषण,MotorSonar एक पेशेवर AI-संचालित इंजन डायग्नोस्टिक टूल है जो कारों, मोटरसाइकिलों और स्कूटरों में इंजन पहनने और खराबी का पता लगाने के लिए ध्वनिक विश्लेषण का उपयोग करता है।
+tr,Turkish,MotorSonar,Yapay Zeka Motor Akustik Teşhisi,MotorSonar, otomobil, motosiklet ve scooter'larda aşınma, rölanti anomalileri ve mekanik arızaları tespit etmek için akustik analiz kullanan profesyonel bir araçtır.
+nl,Dutch,MotorSonar,AI-gedreven motor akoestische diagnose,MotorSonar is een professionele AI-gedreven motordiagnosetool die akoestische analyse gebruikt om slijtage en storingen te detecteren bij auto's, motoren en scooters.
+pl,Polish,MotorSonar,Akustyczna diagnoza silnika z AI,MotorSonar to profesjonalne narzędzie diagnostyczne oparte na AI, wykorzystujące analizę akustyczną do wykrywania zużycia silników samochodów i motocykli w czasie rzeczywistym.
+sv,Swedish,MotorSonar,AI-driven akustisk motordiagnos,MotorSonar är ett professionellt AI-drivet motordiagnosverktyg som använder akustisk analys för att upptäcka slitage och fel i bilar, motorcyklar och scootrar.
+vi,Vietnamese,MotorSonar,Chẩn đoán âm thanh động cơ AI,MotorSonar là công cụ chẩn đoán động cơ chuyên nghiệp tích hợp AI, sử dụng phân tích âm thanh để phát hiện hao mòn, bất ổn không tải và sự cố ở ô tô, xe máy và xe tay ga.
+th,Thai,MotorSonar,วินิจฉัยเสียงเครื่องยนต์ด้วย AI,MotorSonar เป็นเครื่องมือวินิจฉัยเครื่องยนต์ระดับมืออาชีพที่ขับเคลื่อนด้วย AI วิเคราะห์เสียงเพื่อตรวจจับการสึกหรอในรถยนต์ มอเตอร์ไซค์ และสกู๊ตเตอร์
+id,Indonesian,MotorSonar,Diagnostik Suara Mesin AI Profesional,MotorSonar adalah alat diagnostik mesin profesional berbasis AI yang menggunakan analisis akustik untuk mendeteksi keausan, anomali idle, dan kerusakan pada mobil dan sepeda motor.
+uk,Ukrainian,MotorSonar,Акустична діагностика двигуна ШІ,MotorSonar — професійний інструмент діагностики двигунів на основі ШІ для виявлення зносу, аномалій холостого ходу та несправностей автомобілів і мотоциклів.
+cs,Czech,MotorSonar,Akustická diagnóza motoru s AI,MotorSonar je profesionální diagnostický nástroj poháněný AI pro detekci opotřebení, volnoběžných anomálií a závad motorů pomocí akustické analýzy.
+el,Greek,MotorSonar,Ακουστική διάγνωση κινητήρα AI,Το MotorSonar είναι ένα επαγγελματικό εργαλείο διάγνωσης κινητήρα με τεχνητή νοημοσύνη για τον εντοπισμό φθοράς και βλαβών.
+hu,Hungarian,MotorSonar,AI-alapú motor akusztikus diagnosztika,A MotorSonar egy professzionális MI-alapú motordiagnosztikai eszköz kopások és hibák felismerésére.
+ro,Romanian,MotorSonar,Diagnostic acustic motor bazat pe AI,MotorSonar este o unealtă profesională de diagnosticare a motoarelor bazată pe IA pentru detectarea uzurii și defecțiunilor.
+da,Danish,MotorSonar,AI-drevet akustisk motordiagnose,MotorSonar er et professionelt AI-drevet motordiagnoseværktøj til detektion af slid og fejl i motorer.
+fi,Finnish,MotorSonar,Tekoälypohjainen moottoridiagnoosi,MotorSonar on ammattimainen tekoälypohjainen moottorin diagnostiikkatyökalu kulumisen ja vikojen havaitsemiseen.
+nb,Norwegian,MotorSonar,AI-drevet akustisk motordiagnose,MotorSonar er et profesjonelt AI-drevet motordiagnoseverktøy for deteksjon av slitasje og feil.
+sk,Slovak,MotorSonar,Akustická diagnóza motora s AI,MotorSonar je profesionálny diagnostický nástroj poháňaný AI na detekciu opotrebenia a porúch.
+bg,Bulgarian,MotorSonar,Акустична диагностика с AI,MotorSonar е професионален инструмент за диагностика на двигатели с изкуствен интелект за откриване на износване и неизправности.
+hr,Croatian,MotorSonar,AI akustična dijagnostika motora,MotorSonar je profesionalni alat za dijagnostiku motora pokret umjetnom inteligencijom za otkrivanje istrošenosti.
+lt,Lithuanian,MotorSonar,AI variklio akustinė diagnostika,MotorSonar yra profesionalus dirbtinio intelekto variklio diagnostikos įrankis nusidėvėjimui ir gedimams aptikti.
+sl,Slovenian,MotorSonar,AI akustična diagnostika motorja,MotorSonar je profesionalno orodje za diagnostiko motorja z umetno inteligenco za odkrivanje obrabe in okvar.
+et,Estonian,MotorSonar,AI-põhine mootori diagnostika,MotorSonar on professionaalne tehisintellekti mootori diagnostika tööriist kulumise ja rikete tuvastamiseks.
+lv,Latvian,MotorSonar,AI dzinēja akustiskā diagnostika,MotorSonar ir profesionāls mākslīgā intelekta dzinēja diagnostikas rīks nodiluma un kļūmju noteikšanai.
+sr,Serbian,MotorSonar,AI akustična dijagnostika motora,MotorSonar je profesionalni alat za dijagnostiku motora sa veštačkom inteligencijom za otkrivanje habanja.
+fil,Filipino,MotorSonar,AI Pagsusuri sa Tunog ng Makina,Ang MotorSonar ay isang propesyonal na tool sa pag-diagnose ng makina na pinapagana ng AI para sa pagsusuri ng tunog.
+ms,Malay,MotorSonar,Diagnostik Bunyi Enjin AI,MotorSonar ialah alat diagnostik enjin profesional berasaskan AI untuk mengesan keausan dan kerosakan melalui analisis akustik.
+bn,Bengali,MotorSonar,AI ভিত্তিক ইঞ্জিন সাউন্ড ডায়াগনস্টিক,MotorSonar হলো একটি পেশাদার AI চালিত ইঞ্জিন ডায়াগনস্টিক টুল যা ইঞ্জিনের সমস্যা সনাক্ত করে।
+ta,Tamil,MotorSonar,AI எஞ்சின் ஒலியியல் கண்டறிதல்,MotorSonar என்பது AI மூலம் இயங்கும் இயந்திர கண்டறிதல் கருவியாகும்.
+te,Telugu,MotorSonar,AI ఇంజన్ శబ్ద విశ్లేషణ సాధనం,MotorSonar అనేది AI ఆధారిత ఇంజన్ డయాగ్నస్టిక్ సాధనం.
+mr,Marathi,MotorSonar,AI इंजिन ध्वनी निदान साधन,MotorSonar एक व्यावसायिक AI-संचालित इंजिन निदान साधन आहे.
+gu,Gujarati,MotorSonar,AI એન્જિન સાઉન્ડ ડાયગ્નોસ્ટિક,MotorSonar એ AI સંચાલિત વ્યાવસાયિક એન્જિન ડાયગ્નોસ્ટિક સાધન છે.
+kn,Kannada,MotorSonar,AI ಇಂಜಿನಿಯನ್ ಧ್ವನಿ ವಿಶ್ಲೇಷಣೆ,MotorSonar ವೃತ್ತಿಪರ AI ಚಾಲಿತ ಎಂಜಿನ್ ಡಯಾಗ್ನೋಸ್ಟಿಕ್ ಸಾಧನವಾಗಿದೆ.
+ml,Malayalam,MotorSonar,AI എഞ്ചിൻ ശബ്ദ ഡയഗ്നോസ്റ്റിക്,MotorSonar ഒരു പ്രൊഫഷണൽ AI-അധിഷ്ഠിത എഞ്ചിൻ ഡയഗ്നോസ്റ്റിക് ടൂളാണ്.
+pa,Punjabi,MotorSonar,AI ਇੰਜਣ ਆਵਾਜ਼ ਨਿદાન,MotorSonar ਇੱਕ ਪੇਸ਼ੇਵਰ AI-ਸੰਚਾਲਿਤ ਇੰਜਣ ਨਿદાન ਸਾਧਨ ਹੈ।
+ur,Urdu,MotorSonar,AI انجن ساؤنڈ ڈائیگنوسٹک،,MotorSonar ایک پیشہ ور AI سے چلنے والا انجن تشخیصی ٹूल ہے۔
+fa,Persian,MotorSonar,تشخیص صوتی موتور با هوش مصنوعی,MotorSonar یک ابزار حرفه‌ای تشخیص موتور مبتنی بر هوش مصنوعی است.
+sw,Swahili,MotorSonar,Uchunguzi wa Sauti ya Injini ya AI,MotorSonar ni zana ya kitaalamu ya uchunguzi wa injini inayotumia AI kugundua kasoro.
+am,Amharic,MotorSonar,AI የሞተር ድምፅ ምርመራ መሳሪያ,MotorSonar በAI የሚሰራ პროፌሽናል የሞተር ምርመራ መሳሪያ ነው።
+zu,Zu,MotorSonar,AI Ukuxilongwa Komsindo Wenjini,I-MotorSonar iyithuluzi lochwepheshe lokuhlola injini elinikwe amandla yi-AI.
+af,Afrikaans,MotorSonar,AI Enjin Akoestiese Diagnose,MotorSonar is 'n professionele KI-gedrewe enjindiagnostiese hulpmiddel.
+sq,Albanian,MotorSonar,Diagnostikimi Akustik i Motorrit AI,MotorSonar është një mjet profesional i diagnostikimit të motorit i mundësuar nga AI.
+hy,Armenian,MotorSonar,AI շարժիչի ակուստիկ ախտորոշում,MotorSonar-ը արհեստական ​​ինտելեկտով աշխատող շարժիչի ախտորոշման պրոֆեսիոնալ գործիք է։
+az,Azerbaijani,MotorSonar,AI Mühərrik Akustik Diaqnostikası,MotorSonar, süni intellektə əsaslanan peşəkar mühərrik diaqnostika alətidir.
+eu,Basque,MotorSonar,AI Motoraren Diagnostika Akustikoa,MotorSonar AI bidezko motorrak diagnostikatzeko tresna profesionala da.
+be,Belarusian,MotorSonar,AI акустычная дыягностыка рухавіка,MotorSonar — гэта прафесійны інструмент дыягностыкі рухавікоў на базе штучнага інтэлекту.
+bs,Bosnian,MotorSonar,AI akustična dijagnostika motora,MotorSonar je profesionalni alat za dijagnostiku motora sa veštačkom inteligencijom.
+ka,Georgian,MotorSonar,AI ძრავის აკუსტიკური დიაგნოსტიკა,MotorSonar არის პროფესიონალური AI ძრავის დიაგნოსტიკური ინსტრუმენტი.
+kk,Kazakh,MotorSonar,AI қозғалтқышты диагностикалау,MotorSonar — жасанды интеллектпен жұмыс істейтін кәсіби қозғалтқышты диагностикалау құралы.
+mk,Macedonian,MotorSonar,AI акустична дијагностика на мотор,MotorSonar е професионална алатка за дијагностика на мотори со вештачка интелигенција.

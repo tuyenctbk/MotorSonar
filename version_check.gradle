@@ -1,0 +1,15 @@
+repositories {
+    google()
+    mavenCentral()
+}
+configurations {
+    check
+}
+dependencies {
+    check 'com.google.firebase:firebase-vertexai:+'
+}
+task checkVersion {
+    doLast {
+        println "Resolved version: " + configurations.check.resolvedConfiguration.firstLevelModuleDependencies.first().moduleVersion
+    }
+}
