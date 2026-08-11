@@ -293,7 +293,23 @@ object TranslationManager {
             "%1\$s Engine/Motor Profile",
             "BASELINE",
             "HP",
-            "Share"
+            "Share",
+            "Mechanic Voice Context Note",
+            "Attach a voice-recorded note to provide additional context and symptoms for your mechanic.",
+            "Record Voice Note",
+            "Play Voice Note",
+            "Stop Playback",
+            "Re-record",
+            "Delete Note",
+            "Attach to Report",
+            "Enjoying MotorAI Diagnostics?",
+            "If MotorAI has helped you diagnose your vehicle or motorcycle engine, please take a moment to rate us on the Play Store!",
+            "Rate 5 Stars",
+            "Maybe Later",
+            "Share MotorAI with Drivers",
+            "Help fellow motorists and riders keep their engines healthy with instant acoustic AI diagnostics.",
+            "Share App",
+            "Thank you for rating MotorAI!"
         )
 
         try {

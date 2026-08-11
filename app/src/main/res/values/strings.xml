@@ -283,4 +283,20 @@
     <string name="baseline_label">BASELINE</string>
     <string name="hp_label">HP</string>
     <string name="share">Share</string>
+    <string name="mechanic_voice_note_title">Mechanic Voice Context Note</string>
+    <string name="mechanic_voice_note_desc">Attach a voice-recorded note to provide additional context and symptoms for your mechanic.</string>
+    <string name="record_voice_note">Record Voice Note</string>
+    <string name="play_voice_note">Play Voice Note</string>
+    <string name="stop_voice_note">Stop Playback</string>
+    <string name="re_record_voice_note">Re-record</string>
+    <string name="delete_voice_note">Delete Note</string>
+    <string name="attach_voice_note">Attach to Report</string>
+    <string name="rate_app_title">Enjoying MotorAI Diagnostics?</string>
+    <string name="rate_app_desc">If MotorAI has helped you diagnose your vehicle or motorcycle engine, please take a moment to rate us on the Play Store!</string>
+    <string name="rate_now">Rate 5 Stars</string>
+    <string name="rate_later">Maybe Later</string>
+    <string name="share_app_title">Share MotorAI with Drivers</string>
+    <string name="share_app_desc">Help fellow motorists and riders keep their engines healthy with instant acoustic AI diagnostics.</string>
+    <string name="share_app_btn">Share App</string>
+    <string name="toast_thank_you_rating">Thank you for rating MotorAI!</string>
 </resources>

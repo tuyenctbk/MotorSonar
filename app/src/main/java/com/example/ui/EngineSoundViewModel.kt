@@ -99,6 +99,54 @@ class EngineSoundViewModel(private val repository: EngineScanRepository) : ViewM
     private val _mediaRecordDurationMs = MutableStateFlow(0L)
     val mediaRecordDurationMs: StateFlow<Long> = _mediaRecordDurationMs
 
+    private val _showRateAppDialog = MutableStateFlow(false)
+    val showRateAppDialog: StateFlow<Boolean> = _showRateAppDialog
+
+    private val _showShareAppDialog = MutableStateFlow(false)
+    val showShareAppDialog: StateFlow<Boolean> = _showShareAppDialog
+
+    fun checkAndTriggerPrompts(context: Context, isScanCompleted: Boolean = false, isReportShared: Boolean = false) {
+        try {
+            val prefs = context.getSharedPreferences("motosonar_prefs", Context.MODE_PRIVATE)
+            val hasRated = prefs.getBoolean("has_rated_app", false)
+            val hasShared = prefs.getBoolean("has_shared_app", false)
+            var scanCount = prefs.getInt("total_scan_count", 0)
+
+            if (isScanCompleted) {
+                scanCount++
+                prefs.edit().putInt("total_scan_count", scanCount).apply()
+            }
+
+            if (!hasRated && (scanCount == 2 || scanCount == 4)) {
+                _showRateAppDialog.value = true
+            } else if (!hasShared && (isReportShared || scanCount == 3 || scanCount == 5)) {
+                _showShareAppDialog.value = true
+            }
+        } catch (e: Exception) {
+            Log.e("EngineSoundViewModel", "Error checking prompts", e)
+        }
+    }
+
+    fun dismissRateDialog(context: Context, rated: Boolean) {
+        _showRateAppDialog.value = false
+        try {
+            val prefs = context.getSharedPreferences("motosonar_prefs", Context.MODE_PRIVATE)
+            if (rated) {
+                prefs.edit().putBoolean("has_rated_app", true).apply()
+            }
+        } catch (e: Exception) {}
+    }
+
+    fun dismissShareAppDialog(context: Context, shared: Boolean) {
+        _showShareAppDialog.value = false
+        try {
+            val prefs = context.getSharedPreferences("motosonar_prefs", Context.MODE_PRIVATE)
+            if (shared) {
+                prefs.edit().putBoolean("has_shared_app", true).apply()
+            }
+        } catch (e: Exception) {}
+    }
+
     private val _mediaRecordAmplitude = MutableStateFlow(0)
     val mediaRecordAmplitude: StateFlow<Int> = _mediaRecordAmplitude
 
@@ -316,6 +364,9 @@ class EngineSoundViewModel(private val repository: EngineScanRepository) : ViewM
                     
                     // Sync to Firebase Firestore in background
                     FirebaseManager.syncScanToCloud(context, completedScan)
+
+                    // Smartly check and trigger rate or share prompts
+                    checkAndTriggerPrompts(context, isScanCompleted = true)
                 }
             },
             onError = { errorMsg ->
@@ -390,6 +441,18 @@ class EngineSoundViewModel(private val repository: EngineScanRepository) : ViewM
 
     fun setBaselineRequest(request: Boolean) {
         _isCustomBaselineRequested.value = request
+    }
+
+    fun updateScanVoiceNote(scanId: Int, voicePath: String, durationMs: Long) {
+        viewModelScope.launch {
+            _selectedScan.value?.let { currentScan ->
+                if (currentScan.id == scanId) {
+                    val updated = currentScan.copy(voiceNotePath = voicePath, voiceNoteDurationMs = durationMs)
+                    repository.updateScan(updated)
+                    _selectedScan.value = updated
+                }
+            }
+        }
     }
 
     // Audio Playback logic for Recorded Sound Preview & Mechanic Cards

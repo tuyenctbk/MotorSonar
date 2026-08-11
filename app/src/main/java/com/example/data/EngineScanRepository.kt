@@ -21,6 +21,10 @@ class EngineScanRepository(
         return engineScanDao.insertScan(scan)
     }
 
+    suspend fun updateScan(scan: EngineScan) {
+        engineScanDao.insertScan(scan)
+    }
+
     suspend fun deleteScanById(id: Int) {
         engineScanDao.deleteScanById(id)
     }

@@ -94,6 +94,8 @@ fun DashboardScreen(viewModel: EngineSoundViewModel) {
     val vehicleName by viewModel.vehicleName.collectAsStateWithLifecycle()
     val vehicleType by viewModel.vehicleType.collectAsStateWithLifecycle()
     val themeMode by viewModel.themeMode.collectAsStateWithLifecycle()
+    val showRateAppDialog by viewModel.showRateAppDialog.collectAsStateWithLifecycle()
+    val showShareAppDialog by viewModel.showShareAppDialog.collectAsStateWithLifecycle()
 
     var showVehicleSheet by remember { mutableStateOf(false) }
     var showThemeDialog by remember { mutableStateOf(false) }
@@ -222,6 +224,101 @@ fun DashboardScreen(viewModel: EngineSoundViewModel) {
                         viewModel.setThemeMode(mode, context)
                         showThemeDialog = false
                     }
+                )
+            }
+
+            if (showRateAppDialog) {
+                val thankYouMsg = appString(R.string.toast_thank_you_rating)
+                AlertDialog(
+                    onDismissRequest = { viewModel.dismissRateDialog(context, false) },
+                    title = {
+                        Text(
+                            text = appString(R.string.rate_app_title),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    text = {
+                        Text(
+                            text = appString(R.string.rate_app_desc),
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                viewModel.dismissRateDialog(context, true)
+                                Toast.makeText(context, thankYouMsg, Toast.LENGTH_SHORT).show()
+                                try {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${context.packageName}"))
+                                    context.startActivity(intent)
+                                } catch (e: Exception) {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}"))
+                                    context.startActivity(intent)
+                                }
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                        ) {
+                            Text(appString(R.string.rate_now), color = Color.Black, fontWeight = FontWeight.Bold)
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = { viewModel.dismissRateDialog(context, false) }
+                        ) {
+                            Text(appString(R.string.rate_later), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                    },
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(16.dp)
+                )
+            }
+
+            if (showShareAppDialog) {
+                AlertDialog(
+                    onDismissRequest = { viewModel.dismissShareAppDialog(context, false) },
+                    title = {
+                        Text(
+                            text = appString(R.string.share_app_title),
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    },
+                    text = {
+                        Text(
+                            text = appString(R.string.share_app_desc),
+                            fontSize = 13.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                viewModel.dismissShareAppDialog(context, true)
+                                val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                                    type = "text/plain"
+                                    putExtra(Intent.EXTRA_SUBJECT, "MotorAI Engine Diagnostics")
+                                    putExtra(Intent.EXTRA_TEXT, "Check out MotorAI - Instant AI Acoustic Diagnostics for vehicles & motorcycles! Get it on Google Play.")
+                                }
+                                context.startActivity(Intent.createChooser(shareIntent, "Share MotorAI App"))
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                        ) {
+                            Text(appString(R.string.share_app_btn), color = Color.Black, fontWeight = FontWeight.Bold)
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = { viewModel.dismissShareAppDialog(context, false) }
+                        ) {
+                            Text(appString(R.string.rate_later), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                    },
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    shape = RoundedCornerShape(16.dp)
                 )
             }
         }
@@ -996,6 +1093,10 @@ fun ReportDetailsScreen(
     val isPlayingAudio by viewModel.isPlayingAudio.collectAsStateWithLifecycle()
     val aiInsight by viewModel.aiInsight.collectAsStateWithLifecycle()
     val isAiLoading by viewModel.isAiLoading.collectAsStateWithLifecycle()
+    val isMediaRecording by viewModel.isMediaRecording.collectAsStateWithLifecycle()
+    val mediaRecordDurationMs by viewModel.mediaRecordDurationMs.collectAsStateWithLifecycle()
+    val lastRecordedFile by viewModel.lastRecordedFile.collectAsStateWithLifecycle()
+    var showVoiceRecordDialog by remember { mutableStateOf(false) }
     val uriHandler = LocalUriHandler.current
     val context = LocalContext.current
 
@@ -1421,7 +1522,237 @@ fun ReportDetailsScreen(
             }
         }
 
+        Spacer(modifier = Modifier.height(16.dp))
 
+        // Mechanic Voice Context Note Card
+        Card(
+            modifier = Modifier.fillMaxWidth().testTag("mechanic_voice_note_card"),
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+            shape = RoundedCornerShape(16.dp),
+            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+        ) {
+            Column(modifier = Modifier.padding(18.dp)) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Mic,
+                            contentDescription = "Voice Note",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(20.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = appString(R.string.mechanic_voice_note_title),
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                    if (!scan.voiceNotePath.isNullOrBlank()) {
+                        Button(
+                            onClick = { viewModel.toggleAudioPlayback(scan.voiceNotePath) },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = if (isPlayingAudio) AlertRed else MaterialTheme.colorScheme.primary,
+                                contentColor = if (isPlayingAudio) Color.White else MaterialTheme.colorScheme.onPrimary
+                            ),
+                            shape = RoundedCornerShape(20.dp),
+                            contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
+                            modifier = Modifier.height(32.dp).testTag("play_voice_note_button")
+                        ) {
+                            Icon(
+                                imageVector = if (isPlayingAudio) Icons.Default.Stop else Icons.Default.PlayArrow,
+                                contentDescription = "Play",
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = if (isPlayingAudio) appString(R.string.stop_voice_note) else appString(R.string.play_voice_note),
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = if (!scan.voiceNotePath.isNullOrBlank()) {
+                        "Voice-recorded note attached (${scan.voiceNoteDurationMs / 1000}s). Tap to play or update for your mechanic."
+                    } else {
+                        appString(R.string.mechanic_voice_note_desc)
+                    },
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    lineHeight = 16.sp
+                )
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+                ) {
+                    Button(
+                        onClick = { showVoiceRecordDialog = true },
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                        modifier = Modifier.weight(1f).testTag("record_voice_note_button")
+                    ) {
+                        Icon(Icons.Default.Mic, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = if (scan.voiceNotePath.isNullOrBlank()) appString(R.string.record_voice_note) else appString(R.string.re_record_voice_note),
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
+                        )
+                    }
+
+                    if (!scan.voiceNotePath.isNullOrBlank()) {
+                        OutlinedButton(
+                            onClick = {
+                                viewModel.updateScanVoiceNote(scan.id, "", 0L)
+                            },
+                            colors = ButtonDefaults.outlinedButtonColors(contentColor = AlertRed),
+                            modifier = Modifier.testTag("delete_voice_note_button")
+                        ) {
+                            Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(appString(R.string.delete_voice_note), fontSize = 12.sp)
+                        }
+                    }
+                }
+            }
+        }
+
+        if (showVoiceRecordDialog) {
+            AlertDialog(
+                onDismissRequest = {
+                    viewModel.cancelMediaRecording()
+                    showVoiceRecordDialog = false
+                },
+                title = {
+                    Text(
+                        text = appString(R.string.mechanic_voice_note_title),
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                },
+                text = {
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = "Speak clearly into the microphone to describe symptoms or provide context for your mechanic.",
+                            fontSize = 12.sp,
+                            color = SteelGrey,
+                            textAlign = TextAlign.Center
+                        )
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Box(
+                            modifier = Modifier
+                                .size(80.dp)
+                                .background(if (isMediaRecording) AlertRed.copy(alpha = 0.2f) else MaterialTheme.colorScheme.primaryContainer, CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Mic,
+                                contentDescription = "Microphone",
+                                tint = if (isMediaRecording) AlertRed else MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(36.dp)
+                            )
+                        }
+
+                        val recSec = (mediaRecordDurationMs / 1000) % 60
+                        val recMin = (mediaRecordDurationMs / (1000 * 60)) % 60
+                        Text(
+                            text = String.format(Locale.getDefault(), "%02d:%02d", recMin, recSec),
+                            fontSize = 22.sp,
+                            fontWeight = FontWeight.Black,
+                            color = Color.White
+                        )
+
+                        Text(
+                            text = if (isMediaRecording) "Recording..." else (if (lastRecordedFile != null) "Recording complete!" else "Tap record to start"),
+                            fontSize = 12.sp,
+                            color = if (isMediaRecording) AlertRed else SteelGrey
+                        )
+                    }
+                },
+                confirmButton = {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        if (!isMediaRecording && lastRecordedFile == null) {
+                            Button(
+                                onClick = { viewModel.startMediaRecording(context, 30) },
+                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                                modifier = Modifier.fillMaxWidth().testTag("start_recording_dialog_btn")
+                            ) {
+                                Text("Start Recording", color = Color.Black, fontWeight = FontWeight.Bold)
+                            }
+                        } else if (isMediaRecording) {
+                            Button(
+                                onClick = { viewModel.stopMediaRecording() },
+                                colors = ButtonDefaults.buttonColors(containerColor = AlertRed),
+                                modifier = Modifier.fillMaxWidth().testTag("stop_recording_dialog_btn")
+                            ) {
+                                Text("Stop Recording", color = Color.White, fontWeight = FontWeight.Bold)
+                            }
+                        } else if (lastRecordedFile != null) {
+                            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                Button(
+                                    onClick = {
+                                        lastRecordedFile?.let { file ->
+                                            viewModel.updateScanVoiceNote(scan.id, file.absolutePath, mediaRecordDurationMs)
+                                        }
+                                        showVoiceRecordDialog = false
+                                    },
+                                    colors = ButtonDefaults.buttonColors(containerColor = SafeGreen),
+                                    modifier = Modifier.weight(1f).testTag("attach_voice_note_btn")
+                                ) {
+                                    Text(appString(R.string.attach_voice_note), color = Color.Black, fontWeight = FontWeight.Bold)
+                                }
+                                TextButton(
+                                    onClick = {
+                                        viewModel.startMediaRecording(context, 30)
+                                    },
+                                    colors = ButtonDefaults.textButtonColors(contentColor = Color.White)
+                                ) {
+                                    Text("Retake")
+                                }
+                            }
+                        }
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            viewModel.cancelMediaRecording()
+                            showVoiceRecordDialog = false
+                        },
+                        colors = ButtonDefaults.textButtonColors(contentColor = SteelGrey)
+                    ) {
+                        Text(appString(R.string.cancel))
+                    }
+                },
+                containerColor = DarkAsphalt,
+                shape = RoundedCornerShape(16.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // AI Analysis Display Component with Plain English Explanation, Severity Indicator, and Repair Suggestions
         AiAnalysisDisplayCard(
@@ -3796,6 +4127,7 @@ fun HistoryItemCard(
     var showPdfPreview by remember { mutableStateOf(false) }
     val context = LocalContext.current
 
+    val voiceNoteSummary = if (!scan.voiceNotePath.isNullOrBlank()) "\n🎤 Mechanic Voice Note Context Attached (${scan.voiceNoteDurationMs / 1000}s)" else ""
     val formattedReport = """
         📋 MOTORAI ACOUSTIC DIAGNOSTIC REPORT
         =====================================
@@ -3810,7 +4142,7 @@ fun HistoryItemCard(
         
         🔧 Mechanic Recommendation:
         - Action: ${scan.mechanicRecommendation}
-        - Est. Repair Cost: ${scan.repairCostEstimate.ifBlank { "N/A" }}
+        - Est. Repair Cost: ${scan.repairCostEstimate.ifBlank { "N/A" }}${voiceNoteSummary}
         
         📅 Diagnostic Date: $dateText
         =====================================
@@ -4227,6 +4559,15 @@ fun HistoryItemCard(
                                 color = Color.Black,
                                 fontSize = 9.sp
                             )
+                            if (!scan.voiceNotePath.isNullOrBlank()) {
+                                Spacer(modifier = Modifier.height(6.dp))
+                                Text(
+                                    text = "🎤 Mechanic Voice Note Context Attached (${scan.voiceNoteDurationMs / 1000}s)",
+                                    color = AmberOrange,
+                                    fontSize = 8.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
                         }
                     }
 

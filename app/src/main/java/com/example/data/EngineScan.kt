@@ -19,5 +19,7 @@ data class EngineScan(
     val mechanicRecommendation: String,
     val audioFilePath: String? = null, // For the "Play Filtered Sound" button
     val symptomNotes: String = "", // Symptom notes entered or observed during diagnostic
-    val rawAudioAnalysisSummary: String = "" // Raw audio spectrum, peak frequencies, dB, & estimated RPM summary
+    val rawAudioAnalysisSummary: String = "", // Raw audio spectrum, peak frequencies, dB, & estimated RPM summary
+    val voiceNotePath: String? = null, // Voice note recorded for mechanic context
+    val voiceNoteDurationMs: Long = 0L
 )
