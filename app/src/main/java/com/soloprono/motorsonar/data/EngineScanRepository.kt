@@ -22,7 +22,7 @@ class EngineScanRepository(
     }
 
     suspend fun updateScan(scan: EngineScan) {
-        engineScanDao.insertScan(scan)
+        engineScanDao.updateScan(scan)
     }
 
     suspend fun deleteScanById(id: Int) {

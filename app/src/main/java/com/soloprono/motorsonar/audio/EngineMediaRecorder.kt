@@ -14,6 +14,7 @@ class EngineMediaRecorder(private val context: Context) {
     private var mediaRecorder: MediaRecorder? = null
     private var recordJob: Job? = null
     private var currentOutputFile: File? = null
+    private val recorderScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     private val _isRecording = MutableStateFlow(false)
     val isRecording: StateFlow<Boolean> = _isRecording
@@ -59,7 +60,7 @@ class EngineMediaRecorder(private val context: Context) {
             _recordingDurationMs.value = 0L
             _statusText.value = "Recording Engine Audio via MediaRecorder..."
 
-            recordJob = CoroutineScope(Dispatchers.IO).launch {
+            recordJob = recorderScope.launch {
                 val startTime = System.currentTimeMillis()
                 val maxMs = maxDurationSeconds * 1000L
 
@@ -98,7 +99,7 @@ class EngineMediaRecorder(private val context: Context) {
     }
 
     fun stopRecording(): File? {
-        if (!_isRecording.value) return currentOutputFile
+        if (!_isRecording.value) return null
 
         _isRecording.value = false
         recordJob?.cancel()

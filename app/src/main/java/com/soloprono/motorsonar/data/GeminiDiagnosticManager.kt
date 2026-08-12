@@ -37,10 +37,10 @@ object GeminiDiagnosticManager {
             Log.w(TAG, "REST API call failed, trying Firebase Vertex AI fallback: ${(restResult as? GeminiResult.Error)?.technicalDetail}")
         }
 
-        // Priority 2: Firebase Vertex AI fallback using gemini-3.5-flash
+        // Priority 2: Firebase Vertex AI fallback using gemini-1.5-flash
         if (FirebaseManager.isFirebaseInitialized(context)) {
             try {
-                val model = Firebase.vertexAI.generativeModel("gemini-3.5-flash")
+                val model = Firebase.vertexAI.generativeModel("gemini-1.5-flash")
                 val prompt = buildPrompt(scan)
                 val response = model.generateContent(prompt)
                 val text = response.text
@@ -60,7 +60,7 @@ object GeminiDiagnosticManager {
 
     private fun callGeminiRestApi(scan: EngineScan, apiKey: String): GeminiResult<String> {
         return try {
-            val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$apiKey")
+            val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
             val connection = (url.openConnection() as HttpURLConnection).apply {
                 requestMethod = "POST"
                 setRequestProperty("Content-Type", "application/json")
@@ -150,7 +150,7 @@ object GeminiDiagnosticManager {
             try {
                 val bytes = audioFile.readBytes()
                 val base64Data = Base64.encodeToString(bytes, Base64.NO_WRAP)
-                val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$apiKey")
+                val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
                 val connection = (url.openConnection() as HttpURLConnection).apply {
                     requestMethod = "POST"
                     setRequestProperty("Content-Type", "application/json")
@@ -250,7 +250,7 @@ object GeminiDiagnosticManager {
         if (FirebaseManager.isFirebaseInitialized(context)) {
             try {
                 val model = Firebase.vertexAI.generativeModel(
-                    modelName = "gemini-3.5-flash",
+                    modelName = "gemini-1.5-flash",
                     generationConfig = com.google.firebase.vertexai.type.generationConfig {
                         responseMimeType = "application/json"
                     }
@@ -260,7 +260,7 @@ object GeminiDiagnosticManager {
                 
                 val response = model.generateContent(
                     com.google.firebase.vertexai.type.content {
-                        blob("audio/mp4", audioBytes)
+                        inlineData(audioBytes, "audio/mp4")
                         text(promptText)
                     }
                 )

@@ -1,21 +1,61 @@
+# Built Artifacts & Gradle
+/build/
+**/build/
+.gradle/
+.gradle_home/
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Bundles & Packages
+*.apk
+*.ap_
+*.aab
+*.aar
+
+# Kotlin & Java
+.kotlin/
+*.class
+*.dex
+
+# IDEs & Editors
+.idea/
 *.iml
-.gradle
-.kotlin
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+*.ipr
+*.iws
+.vscode/
+
+# Local Config & Secrets
 local.properties
+secrets.properties
 .env
-debug.keystore
+.env.local
+.env.*.local
+
+# Keystores & Signing Keys
 *.jks
 *.keystore
+*.pepk
+*.p12
+*.pem
+*.key
+debug.keystore
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Logs & Memory Dumps
+*.log
+*.hprof
+hs_err_pid*
+replay_pid*
+
+# Scratch Files
 scratch/

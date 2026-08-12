@@ -54,6 +54,8 @@ class EngineSoundProcessor {
     }
 
     private var scanJob: Job? = null
+    private var processorScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    @Volatile private var scanCancelled = false
     private val sampleRate = 16000
     private val channelConfig = AudioFormat.CHANNEL_IN_MONO
     private val audioFormat = AudioFormat.ENCODING_PCM_16BIT
@@ -76,7 +78,8 @@ class EngineSoundProcessor {
         _detectedDb.value = 0.0f
         _statusText.value = context.getString(R.string.status_init_mic)
 
-        scanJob = CoroutineScope(Dispatchers.IO).launch {
+        scanCancelled = false
+        scanJob = processorScope.launch {
             var audioRecord: AudioRecord? = null
             var wavFile: File? = null
             var fileOutputStream: FileOutputStream? = null
@@ -435,7 +438,9 @@ class EngineSoundProcessor {
 
                 withContext(Dispatchers.Main) {
                     _isScanning.value = false
-                    onComplete(finalScan)
+                    if (!scanCancelled) {
+                        onComplete(finalScan)
+                    }
                 }
 
             } catch (e: Exception) {
@@ -450,6 +455,7 @@ class EngineSoundProcessor {
 
     fun stopScan(context: Context? = null) {
         if (!_isScanning.value) return
+        scanCancelled = true
         _isScanning.value = false
         scanJob?.cancel()
         _statusText.value = context?.getString(R.string.status_cancelled) ?: "Scan cancelled"

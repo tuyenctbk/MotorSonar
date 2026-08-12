@@ -42,7 +42,11 @@ class EngineSoundViewModel(private val repository: EngineScanRepository) : ViewM
     private val _diagnosticSensitivity = MutableStateFlow("Standard")
     val diagnosticSensitivity: StateFlow<String> = _diagnosticSensitivity
 
+    private var prefsInitialized = false
+
     fun initUserPreferences(context: Context) {
+        if (prefsInitialized) return
+        prefsInitialized = true
         val prefsManager = UserPreferencesManager.getInstance(context)
         viewModelScope.launch {
             launch { prefsManager.unitsOfMeasurement.collect { _unitsOfMeasurement.value = it } }
@@ -362,8 +366,10 @@ class EngineSoundViewModel(private val repository: EngineScanRepository) : ViewM
                     _selectedScan.value = completedScan
                     _isCustomBaselineRequested.value = false // Reset baseline toggle
                     
-                    // Sync to Firebase Firestore in background
-                    FirebaseManager.syncScanToCloud(context, completedScan)
+                    // Sync to Firebase Firestore in background on IO dispatcher
+                    kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
+                        FirebaseManager.syncScanToCloud(context, completedScan)
+                    }
 
                     // Smartly check and trigger rate or share prompts
                     checkAndTriggerPrompts(context, isScanCompleted = true)
@@ -473,7 +479,12 @@ class EngineSoundViewModel(private val repository: EngineScanRepository) : ViewM
 
     fun seekAudioTo(positionMs: Long) {
         try {
-            mediaPlayer?.seekTo(positionMs.toInt())
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                mediaPlayer?.seekTo(positionMs, MediaPlayer.SEEK_CLOSEST)
+            } else {
+                @Suppress("DEPRECATION")
+                mediaPlayer?.seekTo(positionMs.toInt())
+            }
             _audioPlaybackPositionMs.value = positionMs
         } catch (e: Exception) {
             Log.e("EngineSoundVM", "Error seeking: ${e.message}")

@@ -63,7 +63,7 @@ class LocationManager(private val context: Context) {
         } else {
             // Fallback to browser Google Maps
             val webUri = if (lat != null && lng != null) {
-                Uri.parse("https://www.google.com/maps/search/?api=1&query=$lat,$lng&query_place_id=$query")
+                Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encode(query)}&near=$lat,$lng")
             } else {
                 Uri.parse("https://www.google.com/maps/search/?api=1&query=${Uri.encode(query)}")
             }

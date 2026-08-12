@@ -331,7 +331,7 @@ object TranslationManager {
             var responseText: String? = null
 
             if (apiKey.isNotBlank() && apiKey != "DEFAULT_API_KEY") {
-                val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$apiKey")
+                val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
                 val connection = (url.openConnection() as HttpURLConnection).apply {
                     requestMethod = "POST"
                     setRequestProperty("Content-Type", "application/json")
@@ -369,7 +369,7 @@ object TranslationManager {
             // Fallback to Firebase Vertex AI
             if (responseText == null && FirebaseManager.isFirebaseInitialized(context)) {
                 try {
-                    val model = Firebase.vertexAI.generativeModel("gemini-3.5-flash")
+                    val model = Firebase.vertexAI.generativeModel("gemini-1.5-flash")
                     val response = model.generateContent(prompt)
                     responseText = response.text?.trim()
                 } catch (e: Exception) {
@@ -436,7 +436,7 @@ object TranslationManager {
 
         if (apiKey.isNotBlank() && apiKey != "DEFAULT_API_KEY") {
             try {
-                val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$apiKey")
+                val url = URL("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=$apiKey")
                 val connection = (url.openConnection() as HttpURLConnection).apply {
                     requestMethod = "POST"
                     setRequestProperty("Content-Type", "application/json")
@@ -476,7 +476,7 @@ object TranslationManager {
 
         if (responseText == null && FirebaseManager.isFirebaseInitialized(context)) {
             try {
-                val model = Firebase.vertexAI.generativeModel("gemini-3.5-flash")
+                val model = Firebase.vertexAI.generativeModel("gemini-1.5-flash")
                 val response = model.generateContent(prompt)
                 responseText = response.text?.trim()
             } catch (e: Exception) {

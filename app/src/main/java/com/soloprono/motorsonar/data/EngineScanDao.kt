@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -20,9 +21,13 @@ interface EngineScanDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertScan(scan: EngineScan): Long
 
+    @Update
+    suspend fun updateScan(scan: EngineScan)
+
     @Query("DELETE FROM engine_scans WHERE id = :id")
     suspend fun deleteScanById(id: Int)
 
     @Query("DELETE FROM engine_scans")
     suspend fun deleteAllScans()
 }
+
